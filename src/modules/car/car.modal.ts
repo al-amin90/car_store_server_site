@@ -1,41 +1,42 @@
 import { model, Schema } from 'mongoose';
+import { ICar } from './car.interface';
 
-const carSchema = new Schema(
+const carSchema = new Schema<ICar>(
   {
     brand: {
       type: String,
-      require: [true, 'brand is required'],
+      required: [true, 'brand is required'],
       trim: true,
     },
     model: {
       type: String,
-      require: [true, 'model is required'],
+      required: [true, 'model is required'],
       trim: true,
     },
     year: {
       type: Number,
-      require: [true, 'year is required'],
+      required: [true, 'year is required'],
     },
     price: {
       type: Number,
-      require: [true, 'price is required'],
+      required: [true, 'price is required'],
     },
     category: {
       type: String,
       enum: ['Sedan', ' SUV', 'Truck', 'Coupe', 'Convertible'],
-      require: [true, 'category is required'],
+      required: [true, 'category is required'],
     },
     description: {
       type: String,
-      require: [true, 'description is required'],
+      required: [true, 'description is required'],
     },
     quantity: {
       type: Number,
-      require: [true, 'quantity is required'],
+      required: [true, 'quantity is required'],
     },
     inStock: {
       type: Boolean,
-      require: [true, 'inStock is required'],
+      required: [true, 'inStock is required'],
     },
   },
   {
@@ -43,6 +44,6 @@ const carSchema = new Schema(
   },
 );
 
-const carModal = model('Car', carSchema);
+const carModal = model<ICar>('Car', carSchema);
 
 export default carModal;
