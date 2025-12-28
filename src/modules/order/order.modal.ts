@@ -7,6 +7,7 @@ const orderSchema = new Schema<IOrder>(
       type: String,
       require: [true, 'email is required'],
       trim: true,
+      match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email'],
     },
     car: {
       type: Schema.Types.ObjectId,
@@ -16,10 +17,12 @@ const orderSchema = new Schema<IOrder>(
     quantity: {
       type: Number,
       require: [true, 'quantity is required'],
+      min: [1, 'Quantity must be at least 1'],
     },
     totalPrice: {
       type: Number,
       require: [true, 'totalPrice is required'],
+      min: [0, 'Total price cannot be negative'],
     },
   },
   {

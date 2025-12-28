@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import carService from './car.service';
+import mongoose from 'mongoose';
 
 const createCar = async (req: Request, res: Response) => {
   const payload = req.body;
@@ -47,6 +48,10 @@ const getSingleCar = async (req: Request, res: Response) => {
   const { carId } = req.params;
 
   try {
+    if (!mongoose.Types.ObjectId.isValid(carId)) {
+      throw new Error('Invalid car ID format');
+    }
+
     const result = await carService.getSingleCarFromDB(carId);
     res.status(200).json({
       message: 'Cars retrieved successfully!',
@@ -70,6 +75,10 @@ const updateCar = async (req: Request, res: Response) => {
   const payload = req.body;
 
   try {
+    if (!mongoose.Types.ObjectId.isValid(carId)) {
+      throw new Error('Invalid car ID format');
+    }
+
     const result = await carService.updateCarInDB(carId, payload);
     res.status(200).json({
       message: 'Car updated successfully!',
@@ -92,6 +101,9 @@ const deleteCar = async (req: Request, res: Response) => {
   const { carId } = req.params;
 
   try {
+    if (!mongoose.Types.ObjectId.isValid(carId)) {
+      throw new Error('Invalid car ID format');
+    }
     const result = await carService.deleteCarFromDB(carId);
     res.status(200).json({
       message: 'Car deleted successfully!',
