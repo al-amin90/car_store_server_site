@@ -1,12 +1,13 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import carRouter from './modules/car/car.router';
-import config from './config';
+import orderRouter from './modules/order/order.router';
 const app = express();
 
 //parser
 app.use(express.json());
 
 app.use('/api/cars', carRouter);
+app.use('/api/orders', orderRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Server is Running on Port .:}');

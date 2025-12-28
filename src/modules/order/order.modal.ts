@@ -1,41 +1,25 @@
 import { model, Schema } from 'mongoose';
+import { IOrder } from './order.interface';
 
-const carSchema = new Schema(
+const orderSchema = new Schema<IOrder>(
   {
-    brand: {
+    email: {
       type: String,
-      require: [true, 'brand is required'],
+      require: [true, 'email is required'],
       trim: true,
     },
-    model: {
-      type: String,
-      require: [true, 'model is required'],
-      trim: true,
-    },
-    year: {
-      type: Number,
-      require: [true, 'year is required'],
-    },
-    price: {
-      type: Number,
-      require: [true, 'price is required'],
-    },
-    category: {
-      type: String,
-      enum: ['Sedan', ' SUV', 'Truck', 'Coupe', 'Convertible'],
-      require: [true, 'category is required'],
-    },
-    description: {
-      type: String,
-      require: [true, 'description is required'],
+    car: {
+      type: Schema.Types.ObjectId,
+      ref: 'Car',
+      require: [true, 'car is required'],
     },
     quantity: {
       type: Number,
       require: [true, 'quantity is required'],
     },
-    inStock: {
-      type: Boolean,
-      require: [true, 'inStock is required'],
+    totalPrice: {
+      type: Number,
+      require: [true, 'totalPrice is required'],
     },
   },
   {
@@ -43,6 +27,6 @@ const carSchema = new Schema(
   },
 );
 
-const carModal = model('Car', carSchema);
+const orderModal = model<IOrder>('Order', orderSchema);
 
-export default carModal;
+export default orderModal;
