@@ -32,6 +32,7 @@ const carSchema = new Schema<ICar>(
     },
     quantity: {
       type: Number,
+      min: [0, 'Stock cannot be negative'],
       required: [true, 'quantity is required'],
     },
     inStock: {
