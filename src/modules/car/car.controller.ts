@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import carService from './car.service';
 import mongoose from 'mongoose';
+import { getErrorStack } from '../../utils/utlis';
 
 const createCar = async (req: Request, res: Response) => {
   const payload = req.body;
@@ -12,14 +13,12 @@ const createCar = async (req: Request, res: Response) => {
       success: true,
       result,
     });
-  } catch (error: any) {
-    console.log('error', error);
-
+  } catch (error: unknown) {
     res.status(400).json({
       message: 'Failed to Create Car!',
       success: false,
       error: error,
-      stack: error?.stack,
+      stack: getErrorStack(error),
     });
   }
 };
@@ -32,14 +31,12 @@ const getCar = async (req: Request, res: Response) => {
       success: true,
       result,
     });
-  } catch (error: any) {
-    console.log('error', error);
-
+  } catch (error: unknown) {
     res.status(404).json({
       message: 'Failed to Get all Car!',
       success: false,
       error: error,
-      stack: error?.stack,
+      stack: getErrorStack(error),
     });
   }
 };
@@ -48,24 +45,22 @@ const getSingleCar = async (req: Request, res: Response) => {
   const { carId } = req.params;
 
   try {
-    if (!mongoose.Types.ObjectId.isValid(carId)) {
+    if (!mongoose.Types.ObjectId.isValid(carId as string)) {
       throw new Error('Invalid car ID format');
     }
 
-    const result = await carService.getSingleCarFromDB(carId);
+    const result = await carService.getSingleCarFromDB(carId as string);
     res.status(200).json({
       message: 'Cars retrieved successfully!',
       success: true,
       result,
     });
-  } catch (error) {
-    console.log('error', error);
-
+  } catch (error: unknown) {
     res.status(404).json({
       message: 'Failed to Get Single Car!',
       success: false,
       error,
-      stack: error?.stack,
+      stack: getErrorStack(error),
     });
   }
 };
@@ -75,24 +70,22 @@ const updateCar = async (req: Request, res: Response) => {
   const payload = req.body;
 
   try {
-    if (!mongoose.Types.ObjectId.isValid(carId)) {
+    if (!mongoose.Types.ObjectId.isValid(carId as string)) {
       throw new Error('Invalid car ID format');
     }
 
-    const result = await carService.updateCarInDB(carId, payload);
+    const result = await carService.updateCarInDB(carId as string, payload);
     res.status(200).json({
       message: 'Car updated successfully!',
       success: true,
       result,
     });
-  } catch (error: any) {
-    console.log('error', error);
-
+  } catch (error: unknown) {
     res.status(400).json({
       message: 'Failed to update Car!',
       success: false,
       error: error,
-      stack: error?.stack,
+      stack: getErrorStack(error),
     });
   }
 };
@@ -101,23 +94,23 @@ const deleteCar = async (req: Request, res: Response) => {
   const { carId } = req.params;
 
   try {
-    if (!mongoose.Types.ObjectId.isValid(carId)) {
+    if (!mongoose.Types.ObjectId.isValid(carId as string)) {
       throw new Error('Invalid car ID format');
     }
-    const result = await carService.deleteCarFromDB(carId);
+    const result = await carService.deleteCarFromDB(carId as string);
     res.status(200).json({
       message: 'Car deleted successfully!',
       success: true,
       result,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.log('error', error);
 
     res.status(400).json({
       message: 'Failed to Delete Car!',
       success: false,
       error: error,
-      stack: error?.stack,
+      stack: getErrorStack(error),
     });
   }
 };

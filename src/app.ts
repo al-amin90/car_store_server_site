@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import carRouter from './modules/car/car.router';
 import orderRouter from './modules/order/order.router';
+import config from './config';
 const app = express();
 
 //parser
@@ -10,7 +11,7 @@ app.use('/api/cars', carRouter);
 app.use('/api/orders', orderRouter);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Server is Running on Port .:}');
+  res.send(`Server is Running on port ${config.port}`);
 });
 
 // =====> global error handler

@@ -1,0 +1,34 @@
+npm run build - tsc
+
+1.vercel cli
+
+*❯ vercel.json file 
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/server.js",
+      "use": "@vercel/now"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/server.js"
+    }
+  ]
+}
+
+   (first time)
+**❯ sudo npm i -g vercel
+    vercel -v
+    vercel login
+    vercel --prod
+   
+(re deploy time)
+    vercel --prod
+
+***❯
+****❯ 
+*****❯ 
+ - 
