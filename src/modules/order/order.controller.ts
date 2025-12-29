@@ -23,11 +23,11 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
-const getOrder = async (req: Request, res: Response) => {
+const getRevenueOrder = async (req: Request, res: Response) => {
   try {
     const result = await orderService.getOrderFromDB();
     res.status(200).json({
-      message: 'Orders retrieved successfully!',
+      message: 'Revenue calculated successfully!',
       success: true,
       result,
     });
@@ -35,7 +35,7 @@ const getOrder = async (req: Request, res: Response) => {
     console.log('error', error);
 
     res.status(400).json({
-      message: 'Failed to Get all Order!',
+      message: 'Failed to Get all calculated Revenue!',
       success: false,
       error: error,
       stack: error?.stack,
@@ -43,4 +43,4 @@ const getOrder = async (req: Request, res: Response) => {
   }
 };
 
-export default { createOrder, getOrder };
+export default { createOrder, getRevenueOrder };

@@ -65,7 +65,16 @@ const createOrderInDB = async (data: IOrder) => {
 };
 
 const getOrderFromDB = async () => {
-  const result = await orderModal.find();
+  const result = await orderModal.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalRevenue: { $sum: { $multiply: ['$quantity', '$totalPrice'] } },
+      },
+    },
+    { $project: { _id: 0 } },
+  ]);
+
   return result;
 };
 

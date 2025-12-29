@@ -35,7 +35,7 @@ const getCar = async (req: Request, res: Response) => {
   } catch (error: any) {
     console.log('error', error);
 
-    res.status(400).json({
+    res.status(404).json({
       message: 'Failed to Get all Car!',
       success: false,
       error: error,
@@ -58,13 +58,13 @@ const getSingleCar = async (req: Request, res: Response) => {
       success: true,
       result,
     });
-  } catch (error: any) {
+  } catch (error) {
     console.log('error', error);
 
-    res.status(400).json({
+    res.status(404).json({
       message: 'Failed to Get Single Car!',
       success: false,
-      error: error,
+      error,
       stack: error?.stack,
     });
   }
