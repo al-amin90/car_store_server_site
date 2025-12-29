@@ -6,6 +6,15 @@ A robust RESTful API built with Express, TypeScript, and MongoDB for managing a 
 
 Car Store Server provides a complete backend solution for car dealerships, enabling CRUD operations for car inventory, order processing with automatic inventory management, and revenue tracking through aggregation pipelines.
 
+## ✨ Features
+
+- **Car Management**: Full CRUD operations for car inventory
+- **Order Processing**: Place orders with automatic inventory updates
+- **Inventory Tracking**: Real-time stock management with automatic `inStock` status updates
+- **Revenue Analytics**: Calculate total revenue using MongoDB aggregation
+- **Type Safety**: Built with TypeScript for enhanced code reliability
+- **Data Validation**: Mongoose schema validation ensuring data integrity
+
 ## 🛠️ Tech Stack
 
 - **Runtime**: Node.js
